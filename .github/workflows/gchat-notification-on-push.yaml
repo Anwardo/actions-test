@@ -1,7 +1,7 @@
 name: Track push
 on:
   push:
-    branches: [accept]
+    branches: [main, accept]
     
 jobs:
   build:
