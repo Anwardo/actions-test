@@ -1,10 +1,7 @@
-name: PR and push tracker
+name: Track push
 on:
-  pull_request:
-    types: [opened, reopened, closed, review_requested]
-    branches: [accept, main, de2]
   push:
-    branches: [accept, main]
+    branches: [accept]
     
 jobs:
   build:
@@ -18,5 +15,5 @@ jobs:
           curl --location --request POST 'https://chat.googleapis.com/v1/spaces/AAAAZAydlOI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=XN80owiMh-zLLM1AyxRCs_6hnhukpKBgIeCbHaxy1G4%3D' \
           --header 'Content-Type: application/json' \
           --data-raw '{
-              "text": "'${{ toJson(github.event) }}'"
+              "text": "'${{ github.event.sender.login }}' pushed a commit to accept on '${{ github.event.head_commit.timestamp }}' with message '${{ github.event.head_commit.message }}' and url '${{ github.event.head_commit.url }}'"
           }'
