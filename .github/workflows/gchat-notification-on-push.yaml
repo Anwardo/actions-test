@@ -18,7 +18,7 @@ jobs:
           curl --location --request POST 'https://chat.googleapis.com/v1/spaces/AAAAZAydlOI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=XN80owiMh-zLLM1AyxRCs_6hnhukpKBgIeCbHaxy1G4%3D' \
           --header 'Content-Type: application/json' \
           --data-raw '{
-              "text": "*'${{ github.event.sender.login }}'* pushed a commit to *accept* on '${{ github.event.head_commit.timestamp }}' with message *'${{ github.event.head_commit.message }}'*
+              "text": "*'$sender'* pushed a commit to *accept* on '${{ github.event.head_commit.timestamp }}' with message *'${{ github.event.head_commit.message }}'*
               
               '${{ github.event.head_commit.url }}'"
           }'
