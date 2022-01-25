@@ -11,10 +11,12 @@ jobs:
     steps:
     - name: Google Chat Notification
       env:
+        action: ${{ github.event.action }}
+        url: ${{ github.event.pull_request.url }}
         sender: ${{ github.event.sender.login }}
       run: |
           curl --location --request POST 'https://chat.googleapis.com/v1/spaces/AAAAZAydlOI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=XN80owiMh-zLLM1AyxRCs_6hnhukpKBgIeCbHaxy1G4%3D' \
           --header 'Content-Type: application/json' \
           --data-raw '{
-              "text": "'${{ github.event.sender.login }}' just created a PR"
+              "text": "'$sender' just '$action' a Pull Request on accept"
           }'
