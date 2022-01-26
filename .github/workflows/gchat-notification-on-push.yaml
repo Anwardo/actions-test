@@ -11,6 +11,7 @@ jobs:
     - name: Google Chat Notification
       env:
         sender: ${{ github.event.sender.login }}
+        targetBranch: ${{ github.base_ref }}
         timestamp: ${{ github.event.head_commit.timestamp }}
         message: ${{ github.event.head_commit.message }}
         url: ${{ github.event.head_commit.url }}
@@ -18,5 +19,5 @@ jobs:
           curl --location --request POST 'https://chat.googleapis.com/v1/spaces/AAAAZAydlOI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=XN80owiMh-zLLM1AyxRCs_6hnhukpKBgIeCbHaxy1G4%3D' \
           --header 'Content-Type: application/json' \
           --data-raw '{
-              "text": "*'$sender'* pushed a commit to *accept* on '$timestamp' with message *'$message'* '$url'"
+              "text": "*'$sender'* pushed a commit to *'$targetBranch'* on '$timestamp' with message *'$message'* '$url'"
           }'
