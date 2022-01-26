@@ -11,7 +11,7 @@ jobs:
     - name: Google Chat Notification
       env:
         sender: ${{ github.event.sender.login }}
-        targetBranch: ${{ github.base_ref }}
+        targetBranch: ${{ github.head_ref }}
         timestamp: ${{ github.event.head_commit.timestamp }}
         message: ${{ github.event.head_commit.message }}
         url: ${{ github.event.head_commit.url }}
