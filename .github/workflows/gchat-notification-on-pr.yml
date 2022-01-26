@@ -12,12 +12,14 @@ jobs:
     - name: Google Chat Notification
       env:
         action: ${{ github.event.action }}
-        url: ${{ github.event.pull_request.url }}
+        targetBranch: ${{ github.base_ref }}
+        fromBranch: ${{ github.head_ref }}
+        url: ${{ github.event.pull_request.html_url }}
         sender: ${{ github.event.sender.login }}
         timestamp: ${{ github.event.pull_request.timestamp }}
       run: |
           curl --location --request POST 'https://chat.googleapis.com/v1/spaces/AAAAZAydlOI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=XN80owiMh-zLLM1AyxRCs_6hnhukpKBgIeCbHaxy1G4%3D' \
           --header 'Content-Type: application/json' \
           --data-raw '{
-              "text": "*'$sender'* _'$action'_ a *Pull Request* on accept on '$timestamp' '$url'"
+              "text": "*'$sender'* '$action' a *PR* from *'$fromBranch'* to *'$targetBranch'* on '$timestamp' '$url'"
           }'
